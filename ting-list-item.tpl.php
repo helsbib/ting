@@ -23,12 +23,10 @@
         <?php print array_shift($ting_creators_links) ?>
       <?php } ?>
 
-      <div class='language'><?php echo t('Language') . ': ' . $ting_language; ?></div>
-      <?php if (!empty($ting_creators_links)) {
-          foreach ($ting_creators_links as $creator_link) {
-            print "<p>" . $creator_link . "</p>";
-          }
-      } ?>
+      <?php if ($creator) { ?>
+        <em><?php echo t('by'); ?></em>
+        <?php print $creator ?>
+      <?php } ?>
 
       <?php if (isset($ting_title_full)) { ?>
         <p class="title-info">

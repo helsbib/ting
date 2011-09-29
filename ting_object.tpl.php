@@ -19,13 +19,13 @@
       <h2><?php print $ting_title; ?></h2>
 
       <div class='creator'>
-        <?php if (sizeof($ting_creators_links) == 1): ?>
+        <?php if ($creators) { ?>
           <span class='byline'><?php echo ucfirst(t('by')); ?></span>
-          <?php print $ting_creators_links[0]; ?>
-        <?php endif ?>
-        <?php if ($ting_publication_date): ?>
-          <span class='date'>(<?php print $ting_publication_date; ?>)</span>
-        <?php endif; ?>
+          <?php print $creators; ?>
+        <?php } ?>
+        <?php if ($date) { ?>
+          <span class='date'>(<?php print $date; ?>)</span>
+        <?php } ?>
       </div>
 
       <?php if (isset($ting_title_full)): ?>
