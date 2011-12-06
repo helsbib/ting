@@ -17,8 +17,12 @@
         <?php print $type_list; ?>
       </div>
 
-      <h3>
-        <?php print l($ting_title, $ting_url, array('html' => TRUE, 'attributes' => array('class' =>'title'))) ;?>
+      <?php if ($lang_code): ?>
+        <h3 lang="<?php print $lang_code;?>">
+      <?php else: ?>
+        <h3>
+      <?php endif ?>
+        <?php print l($collection->title, $collection->url, array('attributes' => array('class' =>'title'))) ;?>
       </h3>
 
       <div class="meta">
