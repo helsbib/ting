@@ -321,7 +321,7 @@ function template_preprocess_ting_search_collection(&$vars) {
     }
 
     $links[] = array(
-      'data' => $type,
+      'data' => $type . '<span class="availability">' . $title . '</span>',
       'class' => trim($classes),
       'title' => $title,
     );
