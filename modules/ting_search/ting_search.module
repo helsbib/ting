@@ -301,6 +301,10 @@ function template_preprocess_ting_search_collection(&$vars) {
     $classes = '';
 
     foreach ($objects as $object) {
+      // Get the language from the object record if possible.
+      if (empty($language) && !empty($object->record['dc:language']['dcterms:ISO639-2'][0])) {
+        $language = ting_language_convert($object->record['dc:language']['dcterms:ISO639-2'][0]);
+      }
       // TODO: Really, this should go into ting_availability.
       if (ting_object_is($object, 'limited_availability')) {
         $object_vars = ting_object_preprocess($object);
@@ -313,10 +317,6 @@ function template_preprocess_ting_search_collection(&$vars) {
         $classes = 'available';
         $title = t('Available');
         break;
-      }
-      // Get the language from the object record if possible.
-      if (empty($language) && !empty($object->record['dc:language']['dcterms:ISO639-2'][0])) {
-        $language = ting_language_convert($object->record['dc:language']['dcterms:ISO639-2'][0]);
       }
     }
 
