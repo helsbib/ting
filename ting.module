@@ -442,20 +442,13 @@ function ting_boost_field_element_process($element, $form_state) {
 }
 
 /**
- * Theme function to format the custom form element ting_boost_field.
- */
-function theme_ting_boost_field($element) {
-  return theme('form_element', $element, '<div class="boost-field-instance clear-block">'. $element['#children'] .'</div>');
-}
-
-/**
- * Utility function.
- * Converts an ISO639-2 language code to ISO639-1
+ * Convert a ISO639-2 language code to ISO639-1.
  *
- * @param @lang_code
- * (String) An ISO639-2 language code.
+ * @param string @lang_code
+ *   A ISO639-2 language code.
  *
- * @return An ISO639-1 language code or NULL if no conversion could be made.
+ * @return 
+ *   A ISO639-1 language code or NULL if no conversion could be made.
  */
 function ting_language_convert($lang_code) {
   $languages = array(
