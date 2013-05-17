@@ -1,0 +1,83 @@
+diff --git a/includes/ting.admin.inc b/includes/ting.admin.inc
+index 8487ed6..28a1095 100644
+--- a/includes/ting.admin.inc
++++ b/includes/ting.admin.inc
+@@ -328,7 +328,7 @@ function ting_admin_boost_add_more_submit($form, &$form_state) {
+ }
+ 
+ /**
+- * AHAH callback to add another ranking field to the form.
++ * AHAH callback to add another boost field to the form.
+  */
+ function ting_admin_boost_add_field_ahah() {
+   $form_state = array('submitted' => FALSE);
+@@ -342,7 +342,7 @@ function ting_admin_boost_add_field_ahah() {
+   $delta = max(element_children($form['ting_boost_fields']['fields'])) + 1;
+ 
+   // Added field and update form cache
+-  $form['ting_ranking_fields']['fields'][$delta] = array(
++  $form['ting_boost_fields']['fields'][$delta] = array(
+     '#type' => 'ting_boost_field',
+     '#default_value' => array(),
+   );
+@@ -359,7 +359,7 @@ function ting_admin_boost_add_field_ahah() {
+ 
+   // Render and return the new field.
+   drupal_json(array(
+-    'data' => drupal_render($form['ting_ranking_fields'][$delta]),
++    'data' => drupal_render($form['ting_boost_fields']['fields'][$delta]),
+     'status' => TRUE));
+   exit();
+ }
+diff --git a/ting.module b/ting.module
+index cc998ef..c4181e3 100644
+--- a/ting.module
++++ b/ting.module
+@@ -158,6 +158,21 @@ function ting_theme() {
+ }
+ 
+ /**
++ * Theme function to format the custom form element ting_boost_field.
++ */
++function theme_ting_boost_field($element) {
++  return theme('form_element', $element, '<div class="boost-field-instance clear-block">'. $element['#children'] .'</div>');
++}
++
++
++/**
++ * Theme function to format the custom form element ting_ranking_field.
++ */
++function theme_ting_ranking_field($element) {
++  return theme('form_element', $element, '<div class="ranking-field-instance clear-block">'. $element['#children'] .'</div>');
++}
++
++/**
+  * Implementation of hook_ctools_plugin_api().
+  */
+ function ting_ctools_plugin_api($module, $api) {
+diff --git a/ting.theme.inc b/ting.theme.inc
+index b906ea4..7ce469d 100644
+--- a/ting.theme.inc
++++ b/ting.theme.inc
+@@ -353,21 +353,6 @@ function template_preprocess_ting_tabs(&$vars) {
+ }
+ 
+ /**
+- * Theme function to format the custom form element ting_boost_field.
+- */
+-function theme_ting_boost_field($element) {
+-  return theme('form_element', $element, '<div class="boost-field-instance clear-block">'. $element['#children'] .'</div>');
+-}
+-
+-
+-/**
+- * Theme function to format the custom form element ting_ranking_field.
+- */
+-function theme_ting_ranking_field($element) {
+-  return theme('form_element', $element, '<div class="ranking-field-instance clear-block">'. $element['#children'] .'</div>');
+-}
+-
+-/**
+  * Core function for extracting information from a Ting object into
+  * a variable array.
+ 
